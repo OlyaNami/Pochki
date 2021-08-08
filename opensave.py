@@ -3,7 +3,7 @@ import pydicom
 
 from dcm_classes import Extract
 
-print(__name__) 
+print(__name__)
 
 
 def opensave(dcmpath, savepath):
@@ -14,5 +14,5 @@ def opensave(dcmpath, savepath):
 
 
 if __name__ == '__main__':
-    opensave('mammary_gland.dcm', 'result.jpg')
+    opensave('IM000000.dcm', 'result.jpg')
 

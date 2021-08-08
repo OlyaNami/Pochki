@@ -43,8 +43,12 @@ class Extract:
 
     @staticmethod
     def rescale(dataset, voxels):
-        intercept = dataset.RescaleIntercept
-        slope = dataset.RescaleSlope
+        try:
+            intercept = dataset.RescaleIntercept
+            slope = dataset.RescaleSlope
+        except AttributeError:
+            intercept, slope = 0, 1
+
         if slope != 1:
             voxels = slope * voxels.astype(np.float64)
             voxels = voxels.astype(np.int16)
@@ -54,6 +58,8 @@ class Extract:
             center, width = dataset.WindowCenter[0], dataset.WindowWidth[0]
         except TypeError:
             center, width = dataset.WindowCenter, dataset.WindowWidth
+        except AttributeError:
+            return voxels
 
         # print(f'Window information: center - {center}, width - {width}')
         top_voxel, bot_voxel = center + int(width / 2), center - int(width / 2)
